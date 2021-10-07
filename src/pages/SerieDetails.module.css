@@ -1,0 +1,26 @@
+.detailsContainer{
+    /* al converitrlo en flex container los elementos primer nivel se vuelven items */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.colcontent {
+    max-width: 400px;
+    margin: 40px;
+}
+
+.serieImage {
+    border-radius: 20px;
+}
+
+.serieLoadingimage{
+    
+}
+
+.serieDetails{
+    font-size: 18px;
+    color: whitesmoke;
+    text-shadow: 0px 0px 7px #020202, 0px 0px 1px rgb(12 12 12 / 87%), 11px 0px 15px rgb(69 68 70 / 85%), 0px 0px 0px rgb(255 255 255 / 85%), 0px 0px 2px #ffffff, 0px 0px 14px #ffffff;
+    font-weight: 500;
+}

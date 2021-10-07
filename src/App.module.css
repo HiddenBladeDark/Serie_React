@@ -1,0 +1,30 @@
+.navbar_princ{
+    background-color: rgb(14 14 14);
+    display: block;
+    top: 0%;
+    padding: 20px;
+    box-shadow: -2px 15px 7px 4px rgb(14 14 14);
+  }
+  
+  .navbar_princ h1{
+    text-align: center;
+    color: aliceblue;
+    margin: auto; 
+    text-shadow: 0px 0px 12px #9415FF, 0px 0px 7px rgba(148,21,255,0.87), 11px -4px 19px rgba(148,21,255,0.85), -14px 16px 19px rgba(148,21,255,0.85), 0px 0px 14px #9415FF, 0px 0px 12px #9415FF;
+  }
+  
+  .contenedor{
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
+    display: block;
+    margin: 100px;
+    text-align: center;
+  }
+  
+  
+  .footer_princ{
+      display: block;
+      height: 100px;
+      background-color: rgb(14 14 14);
+  }

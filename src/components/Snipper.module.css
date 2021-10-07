@@ -1,0 +1,19 @@
+.spinner{
+    /* centrar conteid */
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    color: aliceblue;
+}
+
+.spinnig{
+    /* animacion */
+    /* snipper sobre la clase, un segundo de animacion, linear y infinito */
+    animation: spinner 2s reverse infinite;
+}
+/* animacion girado */
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
