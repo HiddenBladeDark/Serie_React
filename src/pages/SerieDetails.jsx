@@ -5,6 +5,7 @@ import { Snipper } from "../components/Snipper"
 import { get } from "../utils/httpClient"
 import serie from "./serie.json"
 import styles from "./SerieDetails.module.css"
+import {useQuery} from "../hooks/useQuery"
 
 export function SerieDetails(){
     // traer el parametro de la url tal cual como esta asignado en app.jsx 
@@ -13,7 +14,8 @@ export function SerieDetails(){
     const [serie,setSerie] = useState(null);
     // utilizamos constante para saber si la pelicula esta cargando y seteamos el estado
     const [isLoading, SetIsLoading] = useState(true);
-    console.log(SetIsLoading)
+
+
     // usamos el useffect para obtener el efecto secundario una vez que cargue el componente y traer los detalles
     useEffect(()=>{
         // antes de gettear los datos, ponemos en true

@@ -6,6 +6,8 @@ import { SerieCard } from "./SerieCard";
 import series from "./series.json"
 import styles from "./SeriesGrid.module.css";
 import { Snipper } from "./Snipper";
+// nuestros hooks
+import {useQuery} from "../hooks/useQuery"
 
 
 export function Seriesgrid(){
@@ -20,6 +22,13 @@ export function Seriesgrid(){
     // estado para el snniper carga en true
     const [IsLoading, setIsLoading] = useState(true);
 
+    // instanciamos 
+    const query = useQuery();
+    // sacamos el valor de search de la busqueda
+    const search = query.get("search");
+    console.log(search)
+
+
     // fetch funcion de js, en el component de react son catalogadas como funciones puras.
     // no pueden tener efectos secundarios, no pueden llamar api dentro del component directamente.
     // para hacer llamadas de api externas, se usa los jubs.
@@ -30,17 +39,25 @@ export function Seriesgrid(){
     useEffect(()=>{
         // cuando este en este punto, este en true el loading
         setIsLoading(true)
-
+        // utilizamos operador ternario
+        // si la condicion search se cumple, le asignamos valor a la url
+        const searchUrl = search 
+        ? "/search/movie?query=" + search
+        // si no, añade la otra url
+        : "/discover/movie"
         // llamamos la funcion de utils, pasandole la url y encadenamos en otra promise
-        get("/discover/movie").then(data => {
+
+        get(searchUrl).then(data => {
             // le pasamos a la funcion modificación el data.results
             setSeries(data.results);
             // cuando este cargado pase a false
             setIsLoading(false);
         })
     // para evitar que cada vez se recargue el componente y no ejecute el efecto secundario
-    // usamos un array de dependencias, lo que hara es ejecutar una sola vez
-    },[]);
+    // usamos un array de dependencias, lo que hara es ejecutar una sola vez estando vacio
+
+    // pero si utilizamos el array de depedencias con un parametro en este caso search. si cambia, se ejecute de nuevo 
+    },[search]);
 
     // si esta cargando true, retorne el componente carga
     if(IsLoading){

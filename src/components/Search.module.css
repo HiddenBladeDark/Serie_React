@@ -2,7 +2,7 @@
  /* centrar */
  display: flex;
  justify-content: right;
- margin: 0px 110px 0px 10px;
+ margin: 0px 10% 0px 10px;
 }
 
 .searchBox{
@@ -28,4 +28,9 @@
     height: 100%;
     background: none;
     border: none;
+}
+.searchInput:focus{
+    outline: none;
+    border: 1px solid #9415ff;
+    box-shadow: 0 0 5px #9415ff;
 }
