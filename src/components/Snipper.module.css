@@ -2,7 +2,7 @@
     /* centrar conteid */
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin: 40px;
     color: aliceblue;
 }
 

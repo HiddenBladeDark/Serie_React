@@ -8,6 +8,8 @@ import styles from "./SeriesGrid.module.css";
 import { Snipper } from "./Snipper";
 // nuestros hooks
 import {useQuery} from "../hooks/useQuery"
+// npm install --save react-infinite-scroll-component
+import InfiniteScroll from "react-infinite-scroll-component"
 
 
 export function Seriesgrid(){
@@ -21,12 +23,15 @@ export function Seriesgrid(){
     const [series, setSeries ] = useState([]);
     // estado para el snniper carga en true
     const [IsLoading, setIsLoading] = useState(true);
+    // estado para pages infite scroll, inicie en 1
+    const [page,setPage] = useState(1);
+    // estado de carga
+    const [hasMore, setHasMore] = useState(true)
 
     // instanciamos 
     const query = useQuery();
     // sacamos el valor de search de la busqueda
     const search = query.get("search");
-    console.log(search)
 
 
     // fetch funcion de js, en el component de react son catalogadas como funciones puras.
@@ -41,15 +46,19 @@ export function Seriesgrid(){
         setIsLoading(true)
         // utilizamos operador ternario
         // si la condicion search se cumple, le asignamos valor a la url
-        const searchUrl = search 
-        ? "/search/movie?query=" + search
+        const searchUrl = search  
+        // le pasamos tambien el paginado de la api
+        ? "/search/movie?query=" + search + "&page=" + page
         // si no, añade la otra url
-        : "/discover/movie"
+        : "/discover/movie?page=" + page;
         // llamamos la funcion de utils, pasandole la url y encadenamos en otra promise
 
         get(searchUrl).then(data => {
             // le pasamos a la funcion modificación el data.results
-            setSeries(data.results);
+            // concatenamos las series que tenemos con las nuevas de la pagina
+            setSeries(prevPage => prevPage.concat(data.results));
+            // si la pagina actual es menor a total de paginas
+            setHasMore(data.page < data.total_pages);
             // cuando este cargado pase a false
             setIsLoading(false);
         })
@@ -57,15 +66,22 @@ export function Seriesgrid(){
     // usamos un array de dependencias, lo que hara es ejecutar una sola vez estando vacio
 
     // pero si utilizamos el array de depedencias con un parametro en este caso search. si cambia, se ejecute de nuevo 
-    },[search]);
-
-    // si esta cargando true, retorne el componente carga
-    if(IsLoading){
-        return <Snipper/>
-    }
-
+    // si cambia la pagina se ejecute el effect en array
+    },[search, page]);
 
     return (
+    <InfiniteScroll
+        // Longitud de datos de series
+        dataLength={series.length}
+        // Funcion  que se va ejecutar cuando llegue final de la pagina. en este caso contador
+        // recomendado es crear esta funcion , al set,lo cual sera siempre el primer estado
+
+        next={()=> setPage((prevPage) => prevPage + 1)}
+        // si es true(hasMore) se ejecutara la funcion que hay en next
+        hasMore={hasMore}
+        // mientras carga muestre el componente de sniper
+        loader={<Snipper/>}
+        >
     <ul className={styles.seriesGrid}>
         {/* con map recorremos el objeto en este caso el json */}
         {
@@ -77,5 +93,6 @@ export function Seriesgrid(){
             ))
         }
     </ul>
+    </InfiniteScroll>
     );
 }   
