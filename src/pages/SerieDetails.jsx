@@ -5,7 +5,11 @@ import { Snipper } from "../components/Snipper"
 import { get } from "../utils/httpClient"
 import serie from "./serie.json"
 import styles from "./SerieDetails.module.css"
+// obtener url
 import {useQuery} from "../hooks/useQuery"
+// obtener condicion operador ternario
+import {getSerieImage} from '../utils/getSerieImage'
+
 
 export function SerieDetails(){
     // traer el parametro de la url tal cual como esta asignado en app.jsx 
@@ -37,13 +41,13 @@ export function SerieDetails(){
         return <Snipper/>
     }
 
+    const imageUrl = getSerieImage(serie.poster_path,500);
 
     // si serie esta nulo nos retorne null
     // if (!serie){
     //     return null;
     // }
 
-    const imageUrl = "https://image.tmdb.org/t/p/w500" + serie.poster_path
     return ( 
     <div className={styles.detailsContainer}>
         {/* de esta forma se concatenan las clases en jsx interpolarizacion */}

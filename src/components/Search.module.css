@@ -22,7 +22,7 @@
 
 .searchButton{
     position: absolute;
-    right: 0;
+    right: 8px;
     top: 0;
     cursor: pointer;
     height: 100%;

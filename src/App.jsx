@@ -33,11 +33,11 @@ export function App(){
                 <Route path="/">404 NOT FOUND</Route>
             </Switch>
         </main>
-        <footer>
+        {/* <footer>
             <div className={styles.footer_princ}>
 
             </div>
-        </footer>
+        </footer> */}
     </Router>
     )
 } 

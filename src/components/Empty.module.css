@@ -1,0 +1,24 @@
+.noResults{
+    /* utilizar elementos de una sola direccion vertical / horizontal se utiliza el flex */
+    /* utilizar elementos multidimensional se usa el grid */
+    display: grid;
+    justify-content: center;
+    background-image: url(../error404en.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: 800px;
+    margin-top: 40px;
+    height: 500px;
+}
+
+@media (max-width:662px){
+    .noResults{
+        background-size:500px ;
+    }
+}
+
+@media (max-width:401px){
+    .noResults{
+        background-size:400px ;
+    }
+}

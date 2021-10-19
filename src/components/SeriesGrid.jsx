@@ -10,9 +10,10 @@ import { Snipper } from "./Snipper";
 import {useQuery} from "../hooks/useQuery"
 // npm install --save react-infinite-scroll-component
 import InfiniteScroll from "react-infinite-scroll-component"
+import { Empty } from "./Empty";
 
-
-export function Seriesgrid(){
+// obtenemos el search componente padre de landingpage 
+export function Seriesgrid({search}){
     // actualizar el estado con los datos actualizados
     // const serieState = useState([]);
     // nos regresa un arreglo, el cual obtenemos el primer acceso en la posicion 0 de series
@@ -28,10 +29,6 @@ export function Seriesgrid(){
     // estado de carga
     const [hasMore, setHasMore] = useState(true)
 
-    // instanciamos 
-    const query = useQuery();
-    // sacamos el valor de search de la busqueda
-    const search = query.get("search");
 
 
     // fetch funcion de js, en el component de react son catalogadas como funciones puras.
@@ -68,6 +65,12 @@ export function Seriesgrid(){
     // pero si utilizamos el array de depedencias con un parametro en este caso search. si cambia, se ejecute de nuevo 
     // si cambia la pagina se ejecute el effect en array
     },[search, page]);
+
+    // si el resultado es 0 de la consulta cargue componente y es diferente a true de la carga
+    if (!IsLoading && series.length === 0){
+        return <Empty/>
+    }
+
 
     return (
     <InfiniteScroll
